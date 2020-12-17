@@ -63,6 +63,8 @@ body {
     /* !!!IMPORTANT, we are positioning absolute 50% top left to the parent element, then moving the elements itself to -50% along its x and y
     axis to bring to the center of the parent element */
     transform: translate(-50%, -50%);
+    /* centering all text inside the text-box including the button */
+    text-align: center;
 }
 
 .heading-primary {
@@ -71,6 +73,7 @@ body {
 
     /* to avoid little bit of shakyness in the animation */
     backface-visibility: hidden;
+    margin-bottom: 60px;
 }
 
 .heading-primary-main {
@@ -98,6 +101,73 @@ body {
     animation-duration: 1s;
     animation-timing-function: ease-out;
 }
+
+
+/* inoder to avoid color changing of link after visited we are appending this sudo classes to the actual slector here its .btn class */
+.btn:link, 
+.btn:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 15px 40px;
+    display: inline-block;
+    border-radius: 100px;
+    /* transition: <property> <duration> */
+    /* transition always needs to be set in initial state */
+    transition: all .2s;
+    position: relative;
+}
+
+.btn:hover{
+    /* y axis goes from top to bottom, x axis goes from left to right */
+    transform: translateY(-3px);
+    /* box-shadow: <x> <y> <blur> <color */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* active means on click animation */
+.btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+
+.btn-white {
+    background-color: #fff;
+    color: #777;
+}
+
+/* to show another button behind the original button -> it can be done using ::after psudo class*/
+.btn::after{
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+
+    transition: all 0.4s;
+}
+
+/* and to set the color of the back button same as main button */
+.btn-white::after{
+    background-color: #fff;
+}
+
+.btn:hover::after{
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0;
+}
+
+.btn-animated {
+    /* animation: <animation-name> <animation-timing> <animation-timing-function> <animation-delay> */
+    animation: moveInBottom 0.5s ease-out .75s;
+
+    /* this will reverse the keyframes that we set below */
+    animation-fill-mode: backwards;
+}
+
 
 /* Header Styling Ends */
 
@@ -136,3 +206,16 @@ body {
     }
 }
 
+@keyframes moveInBottom {
+    0%{
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    100%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animation Ends */
