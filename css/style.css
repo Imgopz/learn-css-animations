@@ -1,0 +1,138 @@
+/*
+COLORS:
+
+Light green: #7ed56f
+Medium green: #55c57a
+Dark green: #28b485
+
+*/
+
+/* Basic CSS Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Basic body font and Styling */
+body {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #777;
+    padding: 30px;
+}
+
+/* Header Styling Starts */
+.header{
+    height: 95vh;
+    background-image: linear-gradient(
+                        to right bottom,
+                        rgba(126, 213, 111, 0.8),
+                        rgba(40, 180, 133, 0.8)), 
+                        url(../img/hero.jpg);
+    /* Cover property make sures that the background image is responsive to the browsers size */
+    background-size: cover;
+    /* Top portion of the image will be fixed, bottom will be cropped, it will be similar for bottom and center as well */
+    background-position: top;
+    position: relative;
+
+    /* Clipping the back ground image */
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    /* https://bennettfeely.com/clippy/ */
+}
+
+.logo-box{
+    /* This is the absolute position of the logo, but we need to set parent element to relative in order to get the exact top and left pixels
+    given below !!!IMPORTANT NOTE so set position to relative of the header element which is parent of this element*/ 
+    position: absolute;
+    top: 40px;
+    left: 40px;
+}
+
+.logo{
+    /* always spesify the height and the widht will be calculated by the browser automatically vice-versa, always prefer to set the height */
+    height: 35px;  
+}
+
+.text-box {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    /* !!!IMPORTANT, we are positioning absolute 50% top left to the parent element, then moving the elements itself to -50% along its x and y
+    axis to bring to the center of the parent element */
+    transform: translate(-50%, -50%);
+}
+
+.heading-primary {
+    color: #fff;
+    text-transform: uppercase;
+
+    /* to avoid little bit of shakyness in the animation */
+    backface-visibility: hidden;
+}
+
+.heading-primary-main {
+    display: block;
+    font-size: 60px;
+    font-weight: 400;
+    letter-spacing: 35px;
+
+    /* Please find the animation definition @keyframe moveInLeft - it's like a function we can call wherever we need */
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+
+    /* animation-iteration-count: 3; */
+    /* animation-delay: 3s; */
+}
+
+.heading-primary-sub {
+    display: block;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 17.4px;
+
+    animation-name: moveInRight;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+}
+
+/* Header Styling Ends */
+
+
+/* Animation Starts */
+@keyframes moveInLeft {
+    0%{
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+
+    80% {
+        transform: translateX(10px);
+    }
+
+    100%{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Animation Starts */
+@keyframes moveInRight {
+    0%{
+        opacity: 0;
+        transform: translateX(100px);
+    }
+
+    80% {
+        transform: translateX(-10px);
+    }
+
+    100%{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
