@@ -1,0 +1,264 @@
+/*
+COLORS:
+
+Light green: #7ed56f
+Medium green: #55c57a
+Dark green: #28b485
+
+*/
+
+// Colors
+$color-primary: #55c57a;
+$color-primary-lite: #7ed56f;
+$color-primary-dark: #28b485;
+
+$color-gray-dark: #777;
+$color-white: #fff;
+$color-black: #000;
+
+
+/* Basic CSS Reset */
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    /* this is the best practice - it will inherit the body's box sizing */
+    box-sizing: inherit;
+}
+
+
+/* html and css is way of presenting a wesite in available pixels neetly and effectively */
+/* all html and css code are converted into pixels during the rendering */
+
+/* px to rem is an effective work flow */
+
+html {
+    /* 10px = 1rem */
+    /* font-size: 10px; */
+    font-size: 62.5%;
+}
+
+/* Basic body font and Styling */
+body {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 1.7;
+    color: $color-gray-dark;
+    /* padding: 30px; */
+    padding: 3rem;
+
+    box-sizing: border-box;
+}
+
+/* Header Styling Starts */
+.header{
+    height: 95vh;
+    background-image: linear-gradient(
+                        to right bottom,
+                        rgba($color-primary-lite, 0.8),
+                        rgba($color-primary-dark, 0.8)), 
+                        url(../img/hero.jpg);
+    /* Cover property make sures that the background image is responsive to the browsers size */
+    background-size: cover;
+    /* Top portion of the image will be fixed, bottom will be cropped, it will be similar for bottom and center as well */
+    background-position: top;
+    position: relative;
+
+    /* Clipping the back ground image */
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    /* https://bennettfeely.com/clippy/ */
+
+    &__logo-box{
+        /* This is the absolute position of the logo, but we need to set parent element to relative in order to get the exact top and left pixels
+        given below !!!IMPORTANT NOTE so set position to relative of the header element which is parent of this element*/ 
+        position: absolute;
+        /* top: 40px; */
+        /* left: 40px; */
+        top: 4rem;
+        left: 4rem;
+        
+        
+    }
+    &__logo{
+        /* always spesify the height and the widht will be calculated by the browser automatically vice-versa, always prefer to set the height */
+        /* height: 35px;   */
+        height: 3.5rem;  
+    }
+    &__text-box {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        /* !!!IMPORTANT, we are positioning absolute 50% top left to the parent element, then moving the elements itself to -50% along its x and y
+        axis to bring to the center of the parent element */
+        transform: translate(-50%, -50%);
+        /* centering all text inside the text-box including the button */
+        text-align: center;
+    }
+}
+
+
+
+
+.heading-primary {
+    color: $color-white;
+    text-transform: uppercase;
+
+    /* to avoid little bit of shakyness in the animation */
+    backface-visibility: hidden;
+    margin-bottom: 6rem;
+}
+
+.heading-primary--main {
+    display: block;
+    font-size: 6rem;
+    font-weight: 400;
+    letter-spacing: 3.5rem;
+
+    /* Please find the animation definition @keyframe moveInLeft - it's like a function we can call wherever we need */
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+
+    /* animation-iteration-count: 3; */
+    /* animation-delay: 3s; */
+}
+
+.heading-primary--sub {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1.75rem;
+
+    animation-name: moveInRight;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+}
+
+
+/* inoder to avoid color changing of link after visited we are appending this sudo classes to the actual slector here its .btn class */
+.btn:link, 
+.btn:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    display: inline-block;
+    border-radius: 10rem;
+    /* transition: <property> <duration> */
+    /* transition always needs to be set in initial state */
+    transition: all .2s;
+    position: relative;
+}
+
+.btn:hover{
+    /* y axis goes from top to bottom, x axis goes from left to right */
+    transform: translateY(-0.3rem);
+    /* box-shadow: <x> <y> <blur> <color */
+    box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
+}
+
+/* active means on click animation */
+.btn:active {
+    transform: translateY(-0.1rem);
+    box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+}
+
+.btn--white {
+    background-color: $color-white;
+    color: $color-gray-dark;
+}
+
+/* to show another button behind the original button -> it can be done using ::after psudo class*/
+.btn::after{
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+
+    transition: all 0.4s;
+}
+
+/* and to set the color of the back button same as main button */
+.btn--white::after{
+    background-color: $color-white;
+}
+
+.btn:hover::after{
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0;
+}
+
+.btn--animated {
+    /* animation: <animation-name> <animation-timing> <animation-timing-function> <animation-delay> */
+    animation: moveInBottom 0.5s ease-out .75s;
+
+    /* this will reverse the keyframes that we set below */
+    animation-fill-mode: backwards;
+}
+
+/* Header Styling Ends */
+
+
+/* Animation Starts */
+@keyframes moveInLeft {
+    0%{
+        opacity: 0;
+        transform: translateX(-10rem);
+    }
+
+    80% {
+        transform: translateX(1rem);
+    }
+
+    100%{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Animation Starts */
+@keyframes moveInRight {
+    0%{
+        opacity: 0;
+        transform: translateX(10rem);
+    }
+
+    80% {
+        transform: translateX(-1rem);
+    }
+
+    100%{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes moveInBottom {
+    0%{
+        opacity: 0;
+        transform: translateY(3rem);
+    }
+
+    100%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animation Ends */
+
+/* Specificty Practice https://codepen.io/Gopz/pen/ExgXpOv */
+
+/* SASS or SCSS - CSS Precompiler https://codepen.io/Gopz/pen/WNGOaOJ?editors=1100 */
+
+/* npm install node-sass --save-dev */
+
+// "compile:sass": "node-sass sass/main.scss css/style.css -w"
+
+// npm run compile:sass
