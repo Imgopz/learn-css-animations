@@ -13,18 +13,23 @@
         <title>Natours | Exciting tours for adventurous people</title>
     </head>
     <body>
+        <!-- BEM - Block Element Modifier -->
+        <!-- here the header is Block of the BEM -->
         <header class="header">
             <!-- Div will help to place the element with respect to the parent element -->
-            <div class="logo-box"> 
-                <img src="./img/logo-white.png" alt="Logo" class="logo">
+            <!-- here the logo-box is element of the header page -->
+            <div class="header__logo-box"> 
+                <img src="./img/logo-white.png" alt="Logo" class="header__logo">
             </div>
-            <div class="text-box">
+            <div class="header__text-box">
+                <!-- here the heading primary is stand alone component and it can be considered as block in BEM model and it can be used anywhere else -->
                 <h1 class="heading-primary">
-                    <span class="heading-primary-main">Outdoors</span>
-                    <span class="heading-primary-sub">is where life happens</span>
+                    <!-- here the main is modifier of the heading-primary block -->
+                    <span class="heading-primary--main">Outdoors</span>
+                    <span class="heading-primary--sub">is where life happens</span>
                 </h1>
-
-                <a href="#" class="btn btn-white btn-animated">Discover our tours</a>
+                <!-- again here the btn element is stand alone component so it can be considered as block in BEM -->
+                <a href="#" class="btn btn--white btn--animated">Discover our tours</a>
             </div>            
         </header>        
     </body>
